@@ -3,13 +3,14 @@
     --card-color:white;
     --text-color:#222;
     --accent:#1e90ff;
+    --stat-bg:#f3f3f3;
 }
 
 body.dark-theme{
     --bg-color:#121212;
     --card-color:#1f1f1f;
     --text-color:white;
-    
+    --stat-bg:#2d2d2d;
 }
 
 *{
@@ -22,9 +23,6 @@ body{
     background:var(--bg-color);
     color:var(--text-color);
     font-family:Arial, Helvetica, sans-serif;
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
 }
 
 .container{
@@ -37,7 +35,6 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding: 10px;
     background-color: orange;
     border-bottom-left-radius: 5px;
@@ -71,7 +68,7 @@ main{
     margin-top:2rem;
 }
 
-/* Search Section------------------------------ */
+/* Search Section */
 .search-section{
     display:flex;
     gap:1rem;
@@ -92,13 +89,12 @@ main{
     cursor:pointer;
 }
 
-/* Card Section------------------------------ */
+/* Card Section */
 .card{
     background:var(--card-color);
     border-radius:12px;
     padding:20px;
 }
-
 
 .weather-card{
     display:flex;
@@ -114,7 +110,7 @@ main{
 .stat-card{
     padding:12px;
     border-radius:8px;
-    background:#f3f3f3;
+    background:var(--stat-bg);
 }
 
 .forecast{
@@ -125,6 +121,25 @@ main{
 .forecast-card{
     flex:1;
     text-align:center;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+/* Milestone 4 UI Additions */
+.forecast-card.today {
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.high-temp {
+    font-weight: bold;
+}
+
+.low-temp {
+    opacity: 0.6;
+    font-size: 0.9rem;
+    margin-left: 4px;
 }
 
 .hourly-card{
@@ -133,9 +148,16 @@ main{
     gap:15px;
 }
 
+#hourly-container {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
 .row{
     display:flex;
     justify-content:space-between;
+    padding: 4px 0;
 }
 
 footer{
