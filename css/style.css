@@ -1,135 +1,202 @@
-:root{
-    --bg-color:#edf0f5;
-    --card-color:white;
-    --text-color:#222;
-    --accent:#1e90ff;
-    --stat-bg:#f3f3f3;
+:root {
+    --bg-color: #edf0f5;
+    --card-color: white;
+    --text-color: #222;
+    --accent: #1e90ff;
+    --stat-bg: #f3f3f3;
+    --header-bg: #f0a500;
+    --header-text: #1a1a1a;
+    --nav-link: #1a1a1a;
 }
 
-body.dark-theme{
-    --bg-color:#121212;
-    --card-color:#1f1f1f;
-    --text-color:white;
-    --stat-bg:#2d2d2d;
+body.dark-theme {
+    --bg-color: #121212;
+    --card-color: #1f1f1f;
+    --text-color: white;
+    --stat-bg: #2d2d2d;
+    --header-bg: #1a1a2e;
+    --header-text: #e0e0e0;
+    --nav-link: #c0c8d8;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:var(--bg-color);
-    color:var(--text-color);
-    font-family:Arial, Helvetica, sans-serif;
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background 0.3s, color 0.3s;
 }
 
-.container{
-    max-width:700px;
-    margin:0 auto;
-    min-height:100vh;
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding: 10px;
-    background-color: orange;
+/* ── Header ── */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: var(--header-bg);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
-header h2{
-    font-size:1.5rem;
-    font-weight:bold;
+    transition: background-color 0.3s;
 }
 
-nav{
-    display:flex;
-    gap:25px;
+header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--header-text);
+}
+
+nav {
+    display: flex;
+    gap: 25px;
     justify-content: center;
 }
 
-nav a{
-    text-decoration:none;
-    color:var(--text-color);
+nav a {
+    text-decoration: none;
+    color: var(--nav-link);
     font-weight: bold;
+    transition: color 0.2s;
 }
-#theme-toggle{
-    font-size:1.5rem;
+
+nav a:hover {
+    opacity: 0.75;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
     border-radius: 10px;
+    padding: 2px 6px;
 }
 
-main{
-    display:flex;
-    flex-direction:column;
-    gap:1.5rem;
-    margin-top:2rem;
+/* ── Main Layout ── */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
-/* Search Section */
-.search-section{
-    display:flex;
-    gap:1rem;
+/* ── Search Section ── */
+.search-section {
+    display: flex;
+    gap: 1rem;
 }
 
-.search-section input{
-    flex:1;
-    padding:12px;
+.search-section input {
+    flex: 1;
+    padding: 12px;
     border-radius: 10px;
     border: 1px solid #ccc;
+    background: var(--card-color);
+    color: var(--text-color);
 }
-.search-section button{ 
-    padding:12px;
+
+.search-section button {
+    padding: 12px;
     border-radius: 10px;
     border: 1px solid #ccc;
     background-color: var(--accent);
-    color:white;
-    cursor:pointer;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
 }
 
-/* Card Section */
-.card{
-    background:var(--card-color);
-    border-radius:12px;
-    padding:20px;
+.search-section button:hover {
+    opacity: 0.85;
 }
 
-.weather-card{
-    display:flex;
-    justify-content:space-between;
+#reset-button {
+    background-color: #e05555;
 }
 
-.weather-right{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+#reset-button:hover {
+    background-color: #c73c3c;
+    opacity: 1;
 }
 
-.stat-card{
-    padding:12px;
-    border-radius:8px;
-    background:var(--stat-bg);
+/* ── Card Base ── */
+.card {
+    background: var(--card-color);
+    border-radius: 12px;
+    padding: 20px;
 }
 
-.forecast{
-    display:flex;
-    gap:10px;
+/* ── Current Weather Card ── */
+.weather-card {
+    display: flex;
+    justify-content: space-between;
 }
 
-.forecast-card{
-    flex:1;
-    text-align:center;
-    display:flex;
-    flex-direction:column;
-    gap:5px;
+.weather-right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Milestone 4 UI Additions */
-.forecast-card.today {
-    border: 2px solid var(--accent);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.stat-card {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--stat-bg);
+}
+
+/* ── Forecast Strip ── */
+.forecast {
+    display: flex;
+    gap: 10px;
+}
+
+.forecast-card {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.forecast-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Selected day (replaces old .today class) */
+.forecast-card.selected {
+    border-color: var(--accent);
+    box-shadow: 0 4px 10px rgba(30, 144, 255, 0.25);
+}
+
+.forecast-icon {
+    font-size: 1.3rem;
+}
+
+.forecast-day {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.forecast-temps {
+    display: flex;
+    gap: 4px;
+    align-items: baseline;
 }
 
 .high-temp {
@@ -139,37 +206,76 @@ main{
 .low-temp {
     opacity: 0.6;
     font-size: 0.9rem;
-    margin-left: 4px;
 }
 
-.hourly-card{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+/* ── Hourly Panel ── */
+.hourly-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 #hourly-container {
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+    display: flex;
+    flex-direction: column;
+    /* Show exactly 5 rows: 5 × 36px = 180px */
+    height: 180px;
+    overflow-y: auto;
+    padding-right: 4px;
+    scroll-behavior: smooth;
 }
 
-.row{
-    display:flex;
-    justify-content:space-between;
-    padding: 4px 0;
+/* Subtle scrollbar styling */
+#hourly-container::-webkit-scrollbar {
+    width: 4px;
 }
 
-footer{
-    display:flex;
-    justify-content:space-between;
-    margin-top:3rem;
-    padding:2rem 0;
-}
-.hidden{
-    display:none;
+#hourly-container::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-#error{
-    color:red;
+#hourly-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+body.dark-theme #hourly-container::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+    padding: 0 4px;
+    border-radius: 6px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+
+.row:hover {
+    background: var(--stat-bg);
+}
+
+/* ── Footer ── */
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+/* ── Utilities ── */
+.hidden {
+    display: none;
+}
+
+#error {
+    color: #e05555;
+    font-weight: bold;
+}
+
+#loading {
+    color: var(--accent);
 }
