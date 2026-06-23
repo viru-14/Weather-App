@@ -1,281 +1,498 @@
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
 :root {
-    --bg-color: #edf0f5;
-    --card-color: white;
-    --text-color: #222;
-    --accent: #1e90ff;
-    --stat-bg: #f3f3f3;
-    --header-bg: #f0a500;
-    --header-text: #1a1a1a;
-    --nav-link: #1a1a1a;
+    --bg-color:       #edf0f5;
+    --card-color:     #ffffff;
+    --text-color:     #222222;
+    --text-muted:     #666666;
+    --accent:         #1e90ff;
+    --accent-glow:    rgba(30, 144, 255, 0.22);
+    --stat-bg:        #f3f3f3;
+    --border-color:   #e0e0e0;
+    --header-bg:      #f0a500;
+    --header-text:    #1a1a1a;
+    --nav-link:       #1a1a1a;
+    --reset-btn:      #e05555;
+    --reset-hover:    #c73c3c;
+    --shadow-sm:      0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md:      0 4px 14px rgba(0,0,0,0.12);
+    --radius:         12px;
+    --radius-sm:      8px;
+    --transition:     0.28s ease;
 }
 
 body.dark-theme {
-    --bg-color: #121212;
-    --card-color: #1f1f1f;
-    --text-color: white;
-    --stat-bg: #2d2d2d;
-    --header-bg: #1a1a2e;
-    --header-text: #e0e0e0;
-    --nav-link: #c0c8d8;
+    --bg-color:       #111318;
+    --card-color:     #1e2028;
+    --text-color:     #e8eaf0;
+    --text-muted:     #9098a8;
+    --stat-bg:        #272b35;
+    --border-color:   #2e3340;
+    --header-bg:      #161922;
+    --header-text:    #dde1ec;
+    --nav-link:       #b0bcd4;
 }
 
-* {
+
+/* ══════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════ */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background: var(--bg-color);
-    color: var(--text-color);
-    font-family: Arial, Helvetica, sans-serif;
-    transition: background 0.3s, color 0.3s;
+    background:   var(--bg-color);
+    color:        var(--text-color);
+    font-family:  Arial, Helvetica, sans-serif;
+    line-height:  1.5;
+    /* Smooth theme switch — all colour props animate together */
+    transition:
+        background-color var(--transition),
+        color            var(--transition);
 }
 
+
+/* ══════════════════════════════════════
+   LAYOUT — CONTAINER
+══════════════════════════════════════ */
 .container {
-    max-width: 700px;
-    margin: 0 auto;
+    max-width:  700px;
+    margin:     0 auto;
     min-height: 100vh;
+    padding:    0 16px;   /* prevents content touching screen edges on all sizes */
 }
 
-/* ── Header ── */
+
+/* ══════════════════════════════════════
+   HEADER
+══════════════════════════════════════ */
 header {
-    display: flex;
+    display:         flex;
+    align-items:     center;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 16px;
+    padding:         10px 20px;
     background-color: var(--header-bg);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    transition: background-color 0.3s;
+    border-bottom-left-radius:  6px;
+    border-bottom-right-radius: 6px;
+    /* Animate header background on theme switch */
+    transition: background-color var(--transition);
 }
 
 header h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--header-text);
+    font-size:   1.4rem;
+    font-weight: 700;
+    color:       var(--header-text);
+    white-space: nowrap;
+    transition:  color var(--transition);
 }
 
 nav {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
+    display:     flex;
+    gap:         20px;
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
-    color: var(--nav-link);
-    font-weight: bold;
-    transition: color 0.2s;
+    color:           var(--nav-link);
+    font-weight:     600;
+    font-size:       0.9rem;
+    padding:         4px 2px;
+    border-bottom:   2px solid transparent;
+    transition:      color var(--transition), border-color 0.2s;
 }
 
-nav a:hover {
-    opacity: 0.75;
+nav a:hover        { border-bottom-color: var(--nav-link); }
+nav a:focus-visible {
+    outline:       2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius:  3px;
 }
 
 #theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    border-radius: 10px;
-    padding: 2px 6px;
+    background:  none;
+    border:      none;
+    cursor:      pointer;
+    font-size:   1.4rem;
+    padding:     4px 6px;
+    border-radius: var(--radius-sm);
+    transition:  background-color 0.2s, transform 0.15s;
+    flex-shrink: 0;
 }
+#theme-toggle:hover         { background: rgba(0,0,0,0.08); }
+#theme-toggle:active        { transform: scale(0.9); }
+#theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-/* ── Main Layout ── */
+body.dark-theme #theme-toggle:hover { background: rgba(255,255,255,0.1); }
+
+
+/* ══════════════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════════════ */
 main {
-    display: flex;
+    display:        flex;
     flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap:            1.4rem;
+    margin-top:     1.8rem;
+    margin-bottom:  1rem;
 }
 
-/* ── Search Section ── */
+
+/* ══════════════════════════════════════
+   SEARCH SECTION
+══════════════════════════════════════ */
 .search-section {
     display: flex;
-    gap: 1rem;
+    gap:     10px;
 }
 
 .search-section input {
-    flex: 1;
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    background: var(--card-color);
-    color: var(--text-color);
+    flex:          1;
+    padding:       11px 14px;
+    border-radius: var(--radius);
+    border:        2px solid var(--border-color);
+    background:    var(--card-color);
+    color:         var(--text-color);
+    font-size:     0.95rem;
+    /* Animate background + border on theme switch */
+    transition:
+        background-color var(--transition),
+        color            var(--transition),
+        border-color     0.2s,
+        box-shadow       0.2s;
+}
+
+/* Focus ring on input */
+.search-section input:focus {
+    outline:      none;
+    border-color: var(--accent);
+    box-shadow:   0 0 0 3px var(--accent-glow);
+}
+
+/* Disabled input during fetch */
+.search-section input:disabled {
+    opacity:        0.55;
+    cursor:         not-allowed;
 }
 
 .search-section button {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    padding:          11px 18px;
+    border-radius:    var(--radius);
+    border:           none;
     background-color: var(--accent);
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: opacity 0.2s;
+    color:            white;
+    font-weight:      700;
+    font-size:        0.9rem;
+    cursor:           pointer;
+    white-space:      nowrap;
+    transition:       opacity 0.2s, transform 0.15s, background-color 0.2s;
 }
 
-.search-section button:hover {
-    opacity: 0.85;
+.search-section button:hover         { opacity: 0.85; }
+.search-section button:active        { transform: scale(0.96); }
+.search-section button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* Disabled button during fetch */
+.search-section button:disabled {
+    opacity:        0.45;
+    cursor:         not-allowed;
+    pointer-events: none;
 }
 
-#reset-button {
-    background-color: #e05555;
-}
+#reset-button              { background-color: var(--reset-btn); }
+#reset-button:hover        { background-color: var(--reset-hover); opacity: 1; }
+#reset-button:focus-visible { outline-color: var(--reset-btn); }
 
-#reset-button:hover {
-    background-color: #c73c3c;
-    opacity: 1;
-}
 
-/* ── Card Base ── */
+/* ══════════════════════════════════════
+   CARD BASE
+══════════════════════════════════════ */
 .card {
-    background: var(--card-color);
-    border-radius: 12px;
-    padding: 20px;
+    background:    var(--card-color);
+    border-radius: var(--radius);
+    padding:       20px;
+    box-shadow:    var(--shadow-sm);
+    border:        1px solid var(--border-color);
+    /* Animate card background on theme switch */
+    transition:
+        background-color var(--transition),
+        border-color     var(--transition),
+        box-shadow       var(--transition);
 }
 
-/* ── Current Weather Card ── */
+
+/* ══════════════════════════════════════
+   CURRENT WEATHER CARD
+══════════════════════════════════════ */
 .weather-card {
-    display: flex;
+    display:         flex;
     justify-content: space-between;
+    gap:             16px;
 }
+
+.weather-left  { flex: 1; }
 
 .weather-right {
-    display: flex;
+    display:        flex;
     flex-direction: column;
-    gap: 10px;
+    gap:            10px;
+    min-width:      160px;
 }
 
 .stat-card {
-    padding: 12px;
-    border-radius: 8px;
-    background: var(--stat-bg);
+    padding:          11px 14px;
+    border-radius:    var(--radius-sm);
+    background:       var(--stat-bg);
+    font-size:        0.9rem;
+    transition:
+        background-color var(--transition),
+        color            var(--transition);
 }
 
-/* ── Forecast Strip ── */
+.stat-card span {
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+
+/* ══════════════════════════════════════
+   FORECAST STRIP
+══════════════════════════════════════ */
 .forecast {
     display: flex;
-    gap: 10px;
+    gap:     10px;
 }
 
 .forecast-card {
-    flex: 1;
-    text-align: center;
-    display: flex;
+    flex:           1;
+    text-align:     center;
+    display:        flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    align-items:    center;
+    gap:            6px;
+    cursor:         pointer;
+    border:         2px solid transparent;
+    user-select:    none;
+    transition:
+        border-color     0.2s,
+        box-shadow       0.2s,
+        transform        0.18s,
+        background-color var(--transition);
 }
 
 .forecast-card:hover {
     border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform:    translateY(-3px);
+    box-shadow:   var(--shadow-md);
 }
 
-/* Selected day (replaces old .today class) */
+.forecast-card:active { transform: translateY(0) scale(0.97); }
+
+/* Keyboard focus ring on forecast cards */
+.forecast-card:focus-visible {
+    outline:        none;
+    border-color:   var(--accent);
+    box-shadow:     0 0 0 3px var(--accent-glow);
+}
+
 .forecast-card.selected {
     border-color: var(--accent);
-    box-shadow: 0 4px 10px rgba(30, 144, 255, 0.25);
+    box-shadow:   0 4px 12px var(--accent-glow);
 }
 
-.forecast-icon {
-    font-size: 1.3rem;
-}
+.forecast-icon { font-size: 1.35rem; }
 
 .forecast-day {
-    font-size: 0.85rem;
-    font-weight: bold;
+    font-size:   0.82rem;
+    font-weight: 700;
 }
 
 .forecast-temps {
-    display: flex;
-    gap: 4px;
+    display:     flex;
+    gap:         4px;
     align-items: baseline;
 }
 
-.high-temp {
-    font-weight: bold;
-}
+.high-temp             { font-weight: 700; }
+.low-temp              { opacity: 0.55; font-size: 0.88rem; }
 
-.low-temp {
-    opacity: 0.6;
-    font-size: 0.9rem;
-}
 
-/* ── Hourly Panel ── */
+/* ══════════════════════════════════════
+   HOURLY PANEL
+══════════════════════════════════════ */
 .hourly-card {
-    display: flex;
+    display:        flex;
     flex-direction: column;
-    gap: 15px;
+    gap:            12px;
 }
 
 #hourly-container {
-    display: flex;
+    display:        flex;
     flex-direction: column;
-    /* Show exactly 5 rows: 5 × 36px = 180px */
-    height: 180px;
-    overflow-y: auto;
-    padding-right: 4px;
+    height:         180px;       /* exactly 5 rows × 36px */
+    overflow-y:     auto;
+    padding-right:  4px;
     scroll-behavior: smooth;
 }
 
-/* Subtle scrollbar styling */
-#hourly-container::-webkit-scrollbar {
-    width: 4px;
-}
-
-#hourly-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
+/* Slim scrollbar */
+#hourly-container::-webkit-scrollbar       { width: 4px; }
+#hourly-container::-webkit-scrollbar-track { background: transparent; }
 #hourly-container::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background:    #ccc;
     border-radius: 4px;
 }
-
-body.dark-theme #hourly-container::-webkit-scrollbar-thumb {
-    background: #555;
-}
+body.dark-theme #hourly-container::-webkit-scrollbar-thumb { background: #444; }
 
 .row {
-    display: flex;
+    display:         flex;
     justify-content: space-between;
-    align-items: center;
-    height: 36px;
-    padding: 0 4px;
-    border-radius: 6px;
-    transition: background 0.15s;
-    flex-shrink: 0;
+    align-items:     center;
+    height:          36px;
+    padding:         0 6px;
+    border-radius:   var(--radius-sm);
+    flex-shrink:     0;
+    transition:      background-color 0.15s;
 }
 
-.row:hover {
-    background: var(--stat-bg);
-}
+.row:hover { background: var(--stat-bg); }
 
-/* ── Footer ── */
-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
-    padding: 2rem 0;
-}
 
-/* ── Utilities ── */
-.hidden {
-    display: none;
+/* ══════════════════════════════════════
+   LOADING & ERROR
+══════════════════════════════════════ */
+#loading {
+    color:       var(--accent);
+    font-weight: 600;
+    text-align:  center;
+    padding:     4px 0;
 }
 
 #error {
-    color: #e05555;
-    font-weight: bold;
+    color:       var(--reset-btn);
+    font-weight: 600;
+    text-align:  center;
 }
 
-#loading {
-    color: var(--accent);
+.hidden { display: none; }
+
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    margin-top:      2rem;
+    padding:         1.5rem 0;
+    border-top:      1px solid var(--border-color);
+    font-size:       0.85rem;
+    color:           var(--text-muted);
+    transition:      border-color var(--transition), color var(--transition);
+}
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — TABLET  (480px – 768px)
+   Single column, inline nav, no forecast scroll
+══════════════════════════════════════ */
+@media (max-width: 768px) and (min-width: 480px) {
+    /* Nav stays visible and inline — no changes needed to structure */
+
+    /* Slightly tighter card padding saves real estate */
+    .card { padding: 16px; }
+
+    /* Stat cards stack inside the flex row better */
+    .weather-right { min-width: 140px; }
+}
+
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE  (< 480px)
+   Single column, collapsed nav, scrolling forecast
+══════════════════════════════════════ */
+@media (max-width: 479px) {
+
+    /* ── Header: hide nav links, keep branding + toggle ── */
+    nav { display: none; }
+
+    header {
+        padding: 10px 14px;
+    }
+
+    header h2 { font-size: 1.2rem; }
+
+    /* ── Container: tighter horizontal gutter ── */
+    .container { padding: 0 10px; }
+
+    main { gap: 1rem; margin-top: 1.2rem; }
+
+    /* ── Search: input on own row, buttons share row below ── */
+    .search-section {
+        flex-wrap: wrap;
+        gap:       8px;
+    }
+
+    .search-section input {
+        flex:  1 1 100%;   /* full-width first row */
+        width: 100%;
+    }
+
+    .search-section button {
+        flex:      1;      /* search + reset share second row equally */
+        padding:   10px 8px;
+        font-size: 0.88rem;
+    }
+
+    /* ── Weather card: stack left over right ── */
+    .weather-card {
+        flex-direction: column;
+        gap:            14px;
+    }
+
+    /* Stat cards: three in a row under the temperature */
+    .weather-right {
+        flex-direction: row;
+        flex-wrap:      wrap;
+        gap:            8px;
+        min-width:      unset;
+    }
+
+    .stat-card {
+        flex:      1 1 calc(33% - 6px); /* 3-across */
+        min-width: 90px;
+        font-size: 0.82rem;
+        text-align: center;
+    }
+
+    /* ── Forecast strip: horizontal scroll ── */
+    .forecast {
+        overflow-x:                auto;
+        flex-wrap:                 nowrap;
+        padding-bottom:            8px;       /* room for inertia scrollbar */
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type:          x mandatory;
+    }
+
+    /* Hide scrollbar on mobile — gesture still works */
+    .forecast::-webkit-scrollbar { display: none; }
+    .forecast                    { scrollbar-width: none; }
+
+    .forecast-card {
+        min-width:   76px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+
+    /* ── Footer: stack vertically on very small screens ── */
+    footer {
+        flex-direction: column;
+        gap:            6px;
+        text-align:     center;
+    }
 }
