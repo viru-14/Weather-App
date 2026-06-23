@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    
+    <header>
+        <h2>Weather App</h2>
+        
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Map</a>
+            <a href="#">Education</a>
+            <a href="#">Historical</a>
+        </nav>
+        
+        <button id="theme-toggle">🌙</button>
+    </header>
+    
+<div class="container">
+
+    <main>
+
+        <section class="search-section">
+            <input
+                type="text"
+                placeholder="Search for a city..."
+            >
+            <button>Search</button>
+        </section>
+
+        <section class="weather-card card">
+
+            <div class="weather-left">
+                <h3>Copenhagen, Denmark</h3>
+
+                <p>Monday, Oct 24</p>
+
+                <h1>12°C</h1>
+
+                <p>Partly Cloudy</p>
+            </div>
+
+            <div class="weather-right">
+
+                <div class="stat-card">
+                    Humidity
+                </div>
+
+                <div class="stat-card">
+                    Wind Speed
+                </div>
+
+                <div class="stat-card">
+                    Pressure
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="forecast">
+
+            <div class="forecast-card card">Today</div>
+            <div class="forecast-card card">Tue</div>
+            <div class="forecast-card card">Wed</div>
+            <div class="forecast-card card">Thu</div>
+            <div class="forecast-card card">Fri</div>
+
+        </section>
+
+        <section class="hourly-card card">
+
+            <h3>Hourly Micro-Data Insights</h3>
+
+            <div class="row">
+                <span>14:00</span>
+                <span>High UV Index</span>
+                <span>12.4°C</span>
+            </div>
+
+            <div class="row">
+                <span>15:00</span>
+                <span>Developing Cumulus</span>
+                <span>11.8°C</span>
+            </div>
+
+            <div class="row">
+                <span>16:00</span>
+                <span>Gust Peak Recorded</span>
+                <span>11.2°C</span>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div>
+            <h3>Weather App</h3>
+        </div>
+
+        <div>
+            Privacy Policy |
+            Terms of Service
+        </div>
+    </footer>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>
