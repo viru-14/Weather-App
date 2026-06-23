@@ -9,20 +9,19 @@
 </head>
 <body>
 
-    
-    <header>
-        <h2>Weather App</h2>
-        
-        <nav>
-            <a href="#">Dashboard</a>
-            <a href="#">Map</a>
-            <a href="#">Education</a>
-            <a href="#">Historical</a>
-        </nav>
-        
-        <button id="theme-toggle">🌙</button>
-    </header>
-    
+<header>
+    <h2>Weather App</h2>
+
+    <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Map</a>
+        <a href="#">Education</a>
+        <a href="#">Historical</a>
+    </nav>
+
+    <button id="theme-toggle">🌙</button>
+</header>
+
 <div class="container">
 
     <main>
@@ -30,35 +29,42 @@
         <section class="search-section">
             <input
                 type="text"
+                id="city-input"
                 placeholder="Search for a city..."
             >
-            <button>Search</button>
+            <button id="search-button">Search</button>
         </section>
+
+        <p id="loading" class="hidden">Loading...</p>
+        <p id="error" class="hidden"></p>
 
         <section class="weather-card card">
 
             <div class="weather-left">
-                <h3>Copenhagen, Denmark</h3>
+                <h3 id="city-name">Search a city</h3>
 
-                <p>Monday, Oct 24</p>
+                <p id="date">--</p>
 
-                <h1>12°C</h1>
+                <h1 id="temperature">--°C</h1>
 
-                <p>Partly Cloudy</p>
+                <p id="condition">Current Weather</p>
             </div>
 
             <div class="weather-right">
 
                 <div class="stat-card">
-                    Humidity
+                    Humidity:
+                    <span id="humidity">--</span>
                 </div>
 
                 <div class="stat-card">
-                    Wind Speed
+                    Wind Speed:
+                    <span id="wind-speed">--</span>
                 </div>
 
                 <div class="stat-card">
-                    Pressure
+                    Pressure:
+                    <span id="pressure">N/A</span>
                 </div>
 
             </div>
@@ -66,13 +72,11 @@
         </section>
 
         <section class="forecast">
-
             <div class="forecast-card card">Today</div>
             <div class="forecast-card card">Tue</div>
             <div class="forecast-card card">Wed</div>
             <div class="forecast-card card">Thu</div>
             <div class="forecast-card card">Fri</div>
-
         </section>
 
         <section class="hourly-card card">

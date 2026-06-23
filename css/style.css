@@ -141,3 +141,10 @@ footer{
     margin-top:3rem;
     padding:2rem 0;
 }
+.hidden{
+    display:none;
+}
+
+#error{
+    color:red;
+}
