@@ -71,6 +71,7 @@ main{
     margin-top:2rem;
 }
 
+/* Search Section------------------------------ */
 .search-section{
     display:flex;
     gap:1rem;
@@ -91,11 +92,13 @@ main{
     cursor:pointer;
 }
 
+/* Card Section------------------------------ */
 .card{
     background:var(--card-color);
     border-radius:12px;
     padding:20px;
 }
+
 
 .weather-card{
     display:flex;
